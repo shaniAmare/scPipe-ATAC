@@ -20,7 +20,8 @@ The package is under active development. Feel free to ask any questions or submi
 
 ```{r}
 install.packages("devtools")
-devtools::install_github("shaniAmare/scPipe-ATAC")```
+devtools::install_github("shaniAmare/scPipe-ATAC")
+```
 
 ## Getting started
 
