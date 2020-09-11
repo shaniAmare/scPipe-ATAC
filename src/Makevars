@@ -2,6 +2,7 @@
 ## have "SystemRequirements: GNU make" in the DESCRIPTION file.
 ## See Rhtslib's vignette for details.
 
+$(info $$PKG_LIBS is [${PKG_LIBS}])
 RHTSLIB_LIBS=$(shell echo 'Rhtslib::pkgconfig("PKG_LIBS")'|\
     "${R_HOME}/bin/R" --vanilla --slave)
 RHTSLIB_CPPFLAGS=$(shell echo 'Rhtslib::pkgconfig("PKG_CPPFLAGS")'|\

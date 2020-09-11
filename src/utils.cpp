@@ -120,3 +120,40 @@ void file_error(char *filename) {
     err_msg << "Can't open file: " << filename << "\n";
     Rcpp::stop(err_msg.str());
 }
+
+char* getFileName(char* path, char* seperator)
+{
+    char *ssc;
+    int l = 0;
+    ssc = std::strstr(path, seperator);
+    do{
+        l = strlen(ssc) + 1;
+        path = &path[strlen(path)-l+2];
+        ssc = strstr(path, seperator);
+    }while(ssc);
+    return path;
+}
+
+char* createFileWithAppend(char* fq_out, const char* appendR1, char* fq1_fn){
+    char* fqoutR1 = (char*)malloc(strlen(fq_out) + strlen(appendR1) + strlen(getFileName(fq1_fn)) + 1);
+    strcpy(fqoutR1, fq_out);
+    strcat(fqoutR1,appendR1);
+    strcat(fqoutR1,getFileName(fq1_fn));
+    return fqoutR1;
+}
+
+void openFile(gzFile &o_stream_gz_R1,std::ofstream &o_stream_R1,char* fqoutR1, bool write_gz){
+    
+    if (write_gz) {
+        o_stream_gz_R1 = gzopen(fqoutR1, "wb2"); // open gz file
+        if (!o_stream_gz_R1) {
+            file_error(fqoutR1);
+        }
+        
+    } else {
+        o_stream_R1.open(fqoutR1); // output file
+        if (!o_stream_R1.is_open()) {
+            file_error(fqoutR1);
+        }
+    }
+}
