@@ -37,9 +37,10 @@ Open RStudio
 
 Load the project
 
+```{r}
 devtools::install()
-
 devtools::load_all()
+```
 
 Install the packages from sc_atac_setup.R
 
@@ -47,43 +48,45 @@ Install the packages from sc_atac_setup.R
 
 ### Demultiplexing -----------------
 
+```{r}
 r1      <- system.file(
   "data","testfastq_S1_L001_R1_001.fastq.gz",package="scPipe-ATAC") 
-
 r2      <- system.file(
   "data","testfastq_S1_L001_R3_001.fastq.gz",package="scPipe-ATAC") 
-
 barcode_fastq      <- system.file(
   "data","testfastq_S1_L001_R2_001.fastq.gz",package="scPipe-ATAC") 
-
 Barcode_path <- system.file("data","barcode.csv",package="scPipe-ATAC")
 
 sc_atac_trim_barcode (r1 = r1, r2 =  r2, bc_file =  barcode_fastq, output_folder = "")
+```
 
 ### Aligning to reference -----------------
 
+```{r}
 reference <- system.file("data", "genome.fa")
-
 r1 <- system.file("scPipe-atac-output", "demux_testfastq_S1_L001_R1_001.fastq.gz")
-
 r2 <- system.file("scPipe-atac-output", "demux_testfastq_S1_L001_R3_001.fastq.gz")
 
 sc_atac_aligning(ref = "data/genome.fa", readFile1 = r1, readFile2=r2)
+```
 
 ### Tagging the aligned BAM file -----------------
 
+```{r}
 bam <- system.file("scPipe-atac-output", "demux_testfastq_S1_L001_R1_001_aligned.bam")
 
 sc_atac_bam_tagging(inbam = bam, outbam="", bam_tags = list(bc="CB", mb="OX"), nthreads=1)
+```
 
 ### Feature counting -----------------
 
+```{r}
 sorted_bam <- system.file("scPipe-atac-output", "testfastq_S1_L001_R1_001_tagged_sorted.BAM") # here is the issue the BAM file extension should be .bam and not .BAM
-
 features   <- system.file("scPipe-atac-output", "NA_peaks.narrowPeak")
 
 sc_atac_feature_counting(insortedbam = sorted_bam, feature_input = features, bam_tags = list(bc="CB", mb="OX"),approach = "peak")
-                                    
+```
+
 ### Currently ends here...
 
 ## Data Preprocessing
