@@ -13,8 +13,6 @@ This package allows barcode demultiplexing, peak calling and quality control of 
 scPipe-ATAC produces a feature-barcode count matrix that is essential for downstream analysis along with a user-friendly HTML report that summarises data quality. 
 These results can be used as input for downstream analyses including normalization, visualization and statistical testing, through a *Single Cell Experiment* object.
 
-**The package is under active development. There can be a lot of bugs if you try to run this version. So please stay tuned here for a more complete version. Yet, you are very welcome to try and ask any questions or submit a pull request. I suggest using the approach in _Getting started (minimal example)_**
-
 The plan is to integrate fully functional scPipe-ATAC functions with the existing scPipe package and allow routine maintenance to happen there.
 
 * [20/07/2020] scPipe-ATAC submitted as a poster to BioC2020 virtual conference
